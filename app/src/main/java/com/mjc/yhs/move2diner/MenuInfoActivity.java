@@ -44,7 +44,7 @@ public class MenuInfoActivity extends AppCompatActivity {
         rvFoodInfo.setEmptyView(findViewById(R.id.empty_menu));
         LinearLayoutManager llm = new LinearLayoutManager(MenuInfoActivity.this);
         rvFoodInfo.setLayoutManager(llm);
-
+//커밋테스트 해봤습니다
         btnAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
