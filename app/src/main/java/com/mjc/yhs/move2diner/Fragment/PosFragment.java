@@ -33,12 +33,12 @@ import java.util.Observable;
 @SuppressLint("ValidFragment")
 public class PosFragment extends Fragment implements FoodListAdapter.FoodListListener, View.OnClickListener {
     private RecyclerView rv;
-    List<Integer> postions;
-    ArrayList<MenuListItem> properties;
-    FoodListAdapter foodListAdapter;
+    private List<Integer> postions;
+    private ArrayList<MenuListItem> properties;
+    private FoodListAdapter foodListAdapter;
 
-    Button tv_totalPrice;
-    int totalPrice;
+    private Button tv_totalPrice;
+    private int totalPrice;
 
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
