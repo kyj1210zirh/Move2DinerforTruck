@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="회원가입"
+        android:textColor="#000000"
+        android:textSize="50sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/emailcheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#c0c0c0"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/sellerEmail"
+                    style="@style/bg_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_email"
+                    android:drawableTint="#000000"
+                    android:hint="이메일을 입력하세요.(a@a.com)"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/passwordcheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#c0c0c0"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/sellerPassword"
+                    style="@style/bg_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawableTint="#000000"
+                    android:hint="패스워드를 입력하세요.(6자 이상)"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <EditText
+                android:id="@+id/sellerTruckName"
+                style="@style/bg_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_name_tag"
+                android:drawableTint="#000000"
+                android:hint="Truck Name"
+                android:singleLine="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/btnSignin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/btn_round_background"
+                    android:backgroundTint="#3498FD"
+                    android:text="확인"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSigninCancle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/btn_round_background"
+                    android:backgroundTint="#404040"
+                    android:text="취소"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

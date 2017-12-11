@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D0D0D0"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnProfile"
+        style="@style/textViewOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_face"
+        android:drawableTint="#000"
+        android:text="나의 트럭" />
+
+    <Button
+        android:id="@+id/btnSalesResult"
+        style="@style/textViewOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_restaurant_menu"
+        android:drawableTint="#000"
+        android:text="영업내역" />
+
+    <Button
+        android:id="@+id/btnFoodInfo"
+        style="@style/textViewOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_restaurant_menu"
+        android:drawableTint="#000"
+        android:text="메뉴관리" />
+
+    <Button
+        android:id="@+id/btnReview"
+        style="@style/textViewOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/ic_rate_review"
+        android:drawableTint="#000"
+        android:text="리뷰관리" />
+
+    <Button
+        style="@style/textViewOther_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="이용약관" />
+
+    <Button
+        style="@style/textViewOther_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="개인정보 취급 방침" />
+
+    <Button
+        style="@style/textViewOther_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="위치기반 서비스 이용약관" />
+
+    <Button
+        style="@style/textViewOther_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="버전 정보" />
+
+    <Button
+        android:id="@+id/btnChangeAuth"
+        style="@style/textViewOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_exit_to_app"
+        android:drawableTint="#000"
+        android:text="사용자 변경" />
+</LinearLayout>

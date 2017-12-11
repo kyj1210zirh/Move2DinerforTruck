@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D0D0D0"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="25dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:padding="5dp">
+        <Button
+            android:id="@+id/btnAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체"
+            />
+        <Button
+            android:id="@+id/btnLastSeven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최근7건"/>
+
+        <Button
+            android:id="@+id/btnLastfifteen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최근15건"/>
+
+        <Button
+            android:id="@+id/btnSelectDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기간선택"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/llSelectDate"
+        android:background="#FFFFFF">
+        <Button
+            android:id="@+id/btnStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시작일"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="~"
+            android:textColor="#000000"/>
+        <Button
+            android:id="@+id/btnEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="종료일"/>
+        <Button
+            android:id="@+id/btnDateSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="조회"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="#D0D0D0" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+</LinearLayout>

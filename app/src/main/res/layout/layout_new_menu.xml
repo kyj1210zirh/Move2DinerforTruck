@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C0C0C0"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="#FFFFFF"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/img_FD"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/lunch_box" />
+
+        <ImageView
+            android:id="@+id/edit_FD_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_FD"
+            android:layout_toRightOf="@id/img_FD"
+            android:src="@drawable/ic_photo_camera"
+            android:tint="#000000" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edt_FDName"
+            style="@style/textViewOther2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTint="#000000"
+            android:hint="메뉴 이름을 입력하세요." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="메뉴이름"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:textColorHint="#303030" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edt_FDPrice"
+            style="@style/textViewOther2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:drawableTint="#000000"
+            android:hint="가격을 입력하세요." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="가격"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:textColorHint="#303030" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edt_FDDescribe"
+            style="@style/textViewOther2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTint="#000000"
+            android:hint="메뉴 설명을 입력하세요."/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="메뉴설명"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:textColorHint="#303030" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFF">
+        <Button
+            android:id="@+id/btn_addFD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메뉴 추가하기"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_outline"
+            android:backgroundTint="#3498FD"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>

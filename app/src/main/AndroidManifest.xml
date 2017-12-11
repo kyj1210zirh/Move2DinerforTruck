@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mjc.yhs.move2diner">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera2" />
+    <application
+        android:name=".BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/llogo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/llogo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".FragmentTab"
+            android:label="Move2DinerforTruck"/>
+        <activity android:name=".SalesResultActivity"/>
+        <activity android:name=".ReviewActivity" />
+        <activity android:name=".MenuInfoActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".NewMenuActivity"/>
+        <activity
+            android:name=".LoginDefaultActivity"
+            android:label="로그인방법 체크화면" />
+        <activity
+            android:name=".SigninActivity"
+            android:label="회원가입 화면" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="로그인 화면" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCWsaGvPUMI223RUqiwLYm2EZY2Ow8ZGLY" />
+
+
+    </application>
+
+</manifest>

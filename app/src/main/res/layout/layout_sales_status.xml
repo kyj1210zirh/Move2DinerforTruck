@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D0D0D0"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtTruckName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:padding="7dp"
+        android:text="Truck Name"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/BtnSalesStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="#444444"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="영업 시작하기"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <fragment
+            android:id="@+id/gmap"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/ivSalesStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#85FFFFFF"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="5dp"
+            android:src="@drawable/ic_access_time"
+            android:tint="#000" />
+
+        <ImageView
+            android:id="@+id/ivSalesLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:background="#85FFFFFF"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="5dp"
+            android:src="@drawable/ic_location_on"
+            android:tint="#000" />
+    </RelativeLayout>
+</LinearLayout>

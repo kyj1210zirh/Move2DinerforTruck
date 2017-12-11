@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#FAFAFA">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="프로필 수정"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:textColor="#4ABECA"
+        android:textSize="30dp"/>
+
+    <EditText
+        android:id="@+id/txtReply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:background="@drawable/textbox"
+        android:ems="10"
+        android:textColor="#5E5E5E"
+        android:inputType="textMultiLine"
+        android:hint="내용을 입력해주세요"
+        android:layout_margin="20dp" />
+
+
+</LinearLayout>

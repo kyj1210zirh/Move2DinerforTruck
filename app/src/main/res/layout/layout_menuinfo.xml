@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D0D0D0"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_titlebar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.mjc.yhs.move2diner.RecyclerViewEmptySupport
+                android:id="@+id/rvFoodInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/empty_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="메뉴를 등록해주세요"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnAddFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="새로운 메뉴 추가"
+            android:background="@drawable/btn_outline"
+            android:backgroundTint="#3498FD"/>
+    </LinearLayout>
+
+</LinearLayout>
