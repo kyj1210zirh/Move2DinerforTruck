@@ -8,26 +8,28 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 
 import com.mjc.yhs.move2diner.Fragment.OthersFragment;
 import com.mjc.yhs.move2diner.Fragment.PosFragment;
 import com.mjc.yhs.move2diner.Fragment.SalesSituationFragment;
 
 public class FragmentTab extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
-    ViewPager viewPager;
-    BottomNavigationView bottomNavigationView;
-    MenuItem prevMenuItem;
+    private SwipeViewPager viewPager;
+    private BottomNavigationView bottomNavigationView;
+    private MenuItem prevMenuItem;
     private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_fragement_tab);
+        new CustomTitlebar(this, "Move 2 Diner", 100); // NO_ARROW_BACK
         initView();
     }
 
     private void initView() {
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = (SwipeViewPager) findViewById(R.id.viewPager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -59,11 +61,12 @@ public class FragmentTab extends AppCompatActivity implements NavigationView.OnN
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(SwipeViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(SalesSituationFragment.newInstance());
         adapter.addFragment(PosFragment.newInstance());
         adapter.addFragment(OthersFragment.newInstance());
+        viewPager.setPagingEnabled(false);
         viewPager.setAdapter(adapter);
     }
 

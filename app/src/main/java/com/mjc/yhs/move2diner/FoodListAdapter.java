@@ -26,13 +26,22 @@ import java.util.ArrayList;
  */
 
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyViewHolder>{
-    Context c;
-    ArrayList<MenuListItem> properties;
-    FoodListListener foodListListener;
+    private Context c;
+    private ArrayList<MenuListItem> properties;
+    private FoodListListener foodListListener;
+    private int itemPosition;
 
     public FoodListAdapter(Context c, ArrayList<MenuListItem> properties) {
         this.c = c;
         this.properties = properties;
+    }
+
+    public int getItemPosition() {
+        return itemPosition;
+    }
+
+    public void setItemPosition(int itemPosition) {
+        this.itemPosition = itemPosition;
     }
 
     @Override
@@ -43,16 +52,19 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        itemPosition = position;
         MenuListItem menuListItem = properties.get(position);
         Glide.with(c).load(menuListItem.getFoodStoragePath()).placeholder(R.drawable.lunch_box).error(R.drawable.lunch_box).into(holder.iv_foodImage);
         holder.tv_foodName.setText(menuListItem.getFoodName());
         holder.tv_foodPrice.setText(NumberFormat.getCurrencyInstance().format(menuListItem.getFoodPrice()));
         holder.tv_foodPrice.setHint(String.valueOf(properties.get(position).getFoodPrice()));
+        holder.tv_foodName.setTextColor(Color.BLACK);
+        holder.tv_foodPrice.setTextColor(Color.BLACK);
+        holder.tv_itemCount.setText("0");
+        holder.tv_itemCount.setVisibility(View.GONE);
         holder.cl_food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.tv_foodName.bringToFront();
-                holder.tv_foodPrice.bringToFront();
                 holder.tv_foodName.setTextColor(Color.WHITE);
                 holder.tv_foodPrice.setTextColor(Color.WHITE);
                 if(holder.tv_itemCount.getVisibility()==View.GONE)
@@ -61,14 +73,13 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
                 holder.tv_itemCount.setText(String.valueOf(cnt));
 
                 int price = Integer.parseInt(holder.tv_foodPrice.getHint().toString());
-                System.out.println("눌린 아이템 " + position);
-                foodListListener.onItemClick(price, position);
+                foodListListener.onItemClick(price, position, cnt);
             }
         });
     }
 
     public interface FoodListListener{
-        void onItemClick(int price, int position);
+        void onItemClick(int price, int position, int cnt);
     }
 
     public void registerFoodListListener(FoodListListener foodListListener){
@@ -92,6 +103,9 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
             tv_foodName = (TextView)itemView.findViewById(R.id.tv_foodName);
             tv_foodPrice = (TextView)itemView.findViewById(R.id.tv_foodPrice);
             tv_itemCount = (TextView)itemView.findViewById(R.id.tv_itemCount);
+
+            tv_foodName.bringToFront();
+            tv_foodPrice.bringToFront();
         }
     }
 }

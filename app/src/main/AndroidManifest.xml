@@ -31,7 +31,7 @@
         <activity android:name=".ReviewActivity" />
         <activity android:name=".MenuInfoActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".NewMenuActivity"/>
+        <activity android:name=".DMMenuActivity"/>
         <activity
             android:name=".LoginDefaultActivity"
             android:label="로그인방법 체크화면" />

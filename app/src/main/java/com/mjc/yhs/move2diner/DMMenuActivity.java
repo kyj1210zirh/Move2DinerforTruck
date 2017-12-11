@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,8 +17,11 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -29,7 +34,7 @@ import gun0912.tedbottompicker.TedBottomPicker;
  * Created by Kang on 2017-12-05.
  */
 
-public class NewMenuActivity extends AppCompatActivity implements View.OnClickListener, PermissionCheck.PermissionCallback {
+public class DMMenuActivity extends AppCompatActivity implements View.OnClickListener, PermissionCheck.PermissionCallback {
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -39,12 +44,12 @@ public class NewMenuActivity extends AppCompatActivity implements View.OnClickLi
 
     ImageView img_FD;
     EditText edt_FDName, edt_FDPrice, edt_FDDescribe;
+    String uid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_new_menu);
-        new CustomTitlebar(this, "메뉴 추가");
 
         permissionCheck = new PermissionCheck(this, 200);
         permissionCheck.registerCallback(this);
@@ -57,6 +62,36 @@ public class NewMenuActivity extends AppCompatActivity implements View.OnClickLi
         img_FD.setOnClickListener(this);
         findViewById(R.id.edit_FD_img).setOnClickListener(this);
         findViewById(R.id.btn_addFD).setOnClickListener(this);
+
+        uid = getIntent().getStringExtra("PrimaryKey");
+        if (uid != null) {
+            new CustomTitlebar(this, "메뉴 수정");
+            ((Button)findViewById(R.id.btn_addFD)).setText("메뉴 수정하기");
+            settingData();
+        } else {
+            new CustomTitlebar(this, "메뉴 추가");
+        }
+    }
+
+    private void settingData() {
+        mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                MenuListItem menuListItem = dataSnapshot.getValue(MenuListItem.class);
+                edt_FDName.setText(menuListItem.getFoodName());
+                edt_FDPrice.setText(String.valueOf(menuListItem.getFoodPrice()));
+                edt_FDDescribe.setText(menuListItem.getFoodDescribe());
+                if (menuListItem.getFoodStoragePath() != null) {
+                    imagePath = Uri.parse(menuListItem.getFoodStoragePath());
+                    Glide.with(DMMenuActivity.this).load(imagePath).into(img_FD);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -73,13 +108,19 @@ public class NewMenuActivity extends AppCompatActivity implements View.OnClickLi
                         .check();
                 break;
             case R.id.btn_addFD:
-                AddMenu(imagePath);
+                if (TextUtils.isEmpty(edt_FDName.getText().toString())) {
+                    edt_FDName.setError("메뉴 이름을 입력하세요.");
+                } else if (TextUtils.isEmpty(edt_FDPrice.getText().toString())) {
+                    edt_FDPrice.setError("메뉴 가격을 입력하세요.");
+                } else {
+                    AddMenu(imagePath);
+                }
                 break;
         }
     }
 
-    public void AddMenu(Uri uri){
-        if(uri!=null){
+    public void AddMenu(Uri uri) {
+        if (uri != null) {
             StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://move2diner.appspot.com");
 
             Uri file = uri;
@@ -107,7 +148,7 @@ public class NewMenuActivity extends AppCompatActivity implements View.OnClickLi
                     mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).push().setValue(fdDTO);
                 }
             });
-        }else{
+        } else {
             MenuListItem fdDTO = new MenuListItem(edt_FDName.getText().toString(),
                     edt_FDDescribe.getText().toString(),
                     Integer.parseInt(edt_FDPrice.getText().toString()),
@@ -119,13 +160,13 @@ public class NewMenuActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void callbackMethod() {
-        TedBottomPicker bottomSheetDialogFragment = new TedBottomPicker.Builder(NewMenuActivity.this)
+        TedBottomPicker bottomSheetDialogFragment = new TedBottomPicker.Builder(DMMenuActivity.this)
                 .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
                     @Override
                     public void onImageSelected(final Uri uri) {
-//                        BaseApplication.getInstance().progressON(NewMenuActivity.this, null);
+//                        BaseApplication.getInstance().progressON(DMMenuActivity.this, null);
                         imagePath = uri;
-                        Glide.with(NewMenuActivity.this).load(imagePath).into(img_FD);
+                        Glide.with(DMMenuActivity.this).load(imagePath).into(img_FD);
 //                        uploadImage(imagePath);
                     }
                 })

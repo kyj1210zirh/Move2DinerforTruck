@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_titlebar_noback" />
+    <include layout="@layout/layout_titlebar" />
 
     <RelativeLayout
         android:id="@+id/container"
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <android.support.v4.view.ViewPager
+        <com.mjc.yhs.move2diner.SwipeViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"

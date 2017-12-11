@@ -48,7 +48,7 @@ public class MenuInfoActivity extends AppCompatActivity {
         btnAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MenuInfoActivity.this, NewMenuActivity.class);
+                Intent i = new Intent(MenuInfoActivity.this, DMMenuActivity.class);
                 startActivity(i);
             }
         });

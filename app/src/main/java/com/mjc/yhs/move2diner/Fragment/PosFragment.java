@@ -3,6 +3,7 @@ package com.mjc.yhs.move2diner.Fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +24,8 @@ import com.mjc.yhs.move2diner.R;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * Created by Kang on 2017-12-10.
@@ -32,8 +33,9 @@ import java.util.Observable;
 
 @SuppressLint("ValidFragment")
 public class PosFragment extends Fragment implements FoodListAdapter.FoodListListener, View.OnClickListener {
+    ConstraintLayout ConstraintLayout1, ConstraintLayout2;
     private RecyclerView rv;
-    private List<Integer> postions;
+    private HashMap<Integer, Integer> postions;
     private ArrayList<MenuListItem> properties;
     private FoodListAdapter foodListAdapter;
 
@@ -54,12 +56,15 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.layout_pos, container, false);
+        ConstraintLayout1 = (ConstraintLayout)rootView.findViewById(R.id.ConstraintLayout1);
+        ConstraintLayout2 = (ConstraintLayout)rootView.findViewById(R.id.ConstraintLayout2);
 
-        postions = new ArrayList<Integer>();
+        postions = new HashMap<Integer, Integer>();
         rootView.findViewById(R.id.btn_cancle).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_next).setOnClickListener(this);
         tv_totalPrice = (Button) rootView.findViewById(R.id.tv_totalPrice);
         rv = (RecyclerView) rootView.findViewById(R.id.rvFoodList);
-        properties = new ArrayList<MenuListItem>();
+        properties = new ArrayList<>();
         foodListAdapter = new FoodListAdapter(getContext(), properties);
         foodListAdapter.registerFoodListListener(this);
         rv.setAdapter(foodListAdapter);
@@ -78,6 +83,14 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
                     properties.add(menuListItem);
                 }
                 foodListAdapter.notifyDataSetChanged();
+                GridLayoutManager glm;
+                if(foodListAdapter.getItemCount()<7)
+                    glm = new GridLayoutManager(getContext(), 2);
+                else if(foodListAdapter.getItemCount()<13)
+                    glm = new GridLayoutManager(getContext(), 3);
+                else
+                    glm = new GridLayoutManager(getContext(), 4);
+                rv.setLayoutManager(glm);
             }
 
             @Override
@@ -88,10 +101,9 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
     }
 
     @Override
-    public void onItemClick(int price, int position) {
+    public void onItemClick(int price, int position, int cnt) {
         totalPrice += price;
-//        System.out.println("눌린 아이템2 " + position);
-        postions.add(position);
+        postions.put(position, cnt);
         tv_totalPrice.setText(NumberFormat.getCurrencyInstance().format(totalPrice));
     }
 
@@ -99,14 +111,19 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancle:
-//                firebaseDatabase.getReference().child("trucks").child("menu").child(user.getUid()).addListenerForSingleValueEvent(valueEventListener);
+                foodListAdapter.notifyItemRangeChanged(0, properties.size());
+                ConstraintLayout2.setVisibility(View.GONE);
+                ConstraintLayout1.setVisibility(View.VISIBLE);
                 totalPrice = 0;
                 tv_totalPrice.setText("금액");
-                for(int i : postions){
-                    foodListAdapter.notifyDataSetChanged();
-                }
                 postions.clear();
+                break;
+            case R.id.btn_next:
+                ConstraintLayout1.setVisibility(View.GONE);
+                ConstraintLayout2.setVisibility(View.VISIBLE);
                 break;
         }
     }
+
+
 }

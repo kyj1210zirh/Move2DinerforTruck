@@ -10,6 +10,7 @@ public class CustomTitlebar {
     private TextView tv_titlebar;
     private ImageView iv_arrow_back;
     private Activity activity;
+    private final int NO_ARROW_BACK = 100;
 
     public CustomTitlebar(Activity _activity, String title) {
         activity = _activity;
@@ -25,5 +26,20 @@ public class CustomTitlebar {
                 activity.finish();
             }
         });
+    }
+
+    public CustomTitlebar(Activity _activity, String title, int TAG) {
+        activity = _activity;
+
+        tv_titlebar = (TextView) activity.findViewById(R.id.tv_titlebar);
+        iv_arrow_back = (ImageView) activity.findViewById(R.id.iv_arrow_back);
+
+        tv_titlebar.setText(title);
+
+        switch (TAG) {
+            case NO_ARROW_BACK:
+                iv_arrow_back.setVisibility(View.GONE);
+                break;
+        }
     }
 }
