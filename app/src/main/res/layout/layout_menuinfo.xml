@@ -37,9 +37,10 @@
             android:id="@+id/btnAddFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="새로운 메뉴 추가"
+            android:layout_marginTop="1dp"
             android:background="@drawable/btn_outline"
-            android:backgroundTint="#3498FD"/>
+            android:backgroundTint="#3498FD"
+            android:text="새로운 메뉴 추가" />
     </LinearLayout>
 
 </LinearLayout>

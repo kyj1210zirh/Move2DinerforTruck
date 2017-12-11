@@ -79,9 +79,6 @@ public class NewMenuActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void AddMenu(Uri uri){
-        final MenuListItem[] fdDTO = {new MenuListItem(edt_FDName.getText().toString(),
-                edt_FDDescribe.getText().toString(),
-                Integer.parseInt(edt_FDPrice.getText().toString()))};
         if(uri!=null){
             StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://move2diner.appspot.com");
 
@@ -103,13 +100,20 @@ public class NewMenuActivity extends AppCompatActivity implements View.OnClickLi
                     @SuppressWarnings("VisibleForTests") final //BUG , 적어줘야 에러안남
                             Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
-                    fdDTO[0].setFoodStoragePath(taskSnapshot.getDownloadUrl().toString());
+                    MenuListItem fdDTO = new MenuListItem(edt_FDName.getText().toString(),
+                            edt_FDDescribe.getText().toString(),
+                            Integer.parseInt(edt_FDPrice.getText().toString()),
+                            taskSnapshot.getDownloadUrl().toString());
+                    mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).push().setValue(fdDTO);
                 }
             });
         }else{
-            fdDTO[0].setFoodStoragePath("https://firebasestorage.googleapis.com/v0/b/move2diner.appspot.com/o/images%2Fmenus%2FJPEG_20171113165628_1722086011.jpg?alt=media&token=0ce34944-f687-4e7a-a4ea-f63234e10703");
+            MenuListItem fdDTO = new MenuListItem(edt_FDName.getText().toString(),
+                    edt_FDDescribe.getText().toString(),
+                    Integer.parseInt(edt_FDPrice.getText().toString()),
+                    "https://firebasestorage.googleapis.com/v0/b/move2diner.appspot.com/o/images%2Fmenus%2FJPEG_20171113165628_1722086011.jpg?alt=media&token=0ce34944-f687-4e7a-a4ea-f63234e10703");
+            mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).push().setValue(fdDTO);
         }
-        mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).push().setValue(fdDTO[0]);
         finish();
     }
 

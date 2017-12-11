@@ -1,20 +1,12 @@
 package com.mjc.yhs.move2diner;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,12 +21,11 @@ import java.util.ArrayList;
 
 
 public class MenuInfoActivity extends AppCompatActivity {
-    RecyclerViewEmptySupport rvFoodInfo;
-    ArrayList<MenuListItem> properties = new ArrayList<>();
-    ArrayList<String> menuKeys = new ArrayList<>();
-    Button btnAddFood;
-    MenuListAdapter menuListAdapter;
-    View dialogView;
+    private RecyclerViewEmptySupport rvFoodInfo;
+    private ArrayList<MenuListItem> properties = new ArrayList<>();
+    private ArrayList<String> menuKeys = new ArrayList<>();
+    private Button btnAddFood;
+    private MenuListAdapter menuListAdapter;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -61,39 +52,6 @@ public class MenuInfoActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-//        btnAddFood.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialogView = View.inflate(MenuInfoActivity.this, R.layout.menu_foodinfo, null);
-//                AlertDialog.Builder dlg = new AlertDialog.Builder(MenuInfoActivity.this);
-//                dlg.setTitle("메뉴 추가");
-//                dlg.setView(dialogView);
-//                dlg.setNegativeButton("취소", null);
-//                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        EditText txtMenuName = (EditText) dialogView.findViewById(R.id.txtMenuName);
-//                        EditText txtMenuPrice = (EditText) dialogView.findViewById(R.id.txtMenuPrice);
-//                        EditText txtMenuDescribe = (EditText) dialogView.findViewById(R.id.txtMenuDescribe);
-//
-//                        try{
-//                            MenuListItem fdDTO = new MenuListItem(txtMenuName.getText().toString(),
-//                                    txtMenuDescribe.getText().toString(),
-//                                    Integer.parseInt(txtMenuPrice.getText().toString())
-//                            );
-//
-//                            mDatabase.child("trucks").child("menu").child(user.getUid()).push().setValue(fdDTO);
-//                        } catch (Exception e){
-//                            Log.e("Add Menu Exception ", e.getMessage());
-//                            Toast.makeText(getApplicationContext(), "메뉴 추가 실패", Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                    }
-//                });
-//                dlg.show();
-//            }
-//        });
-
 
         mDatabase.child("trucks").child("menu").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override

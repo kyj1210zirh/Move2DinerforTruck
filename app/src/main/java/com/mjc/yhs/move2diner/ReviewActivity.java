@@ -18,12 +18,10 @@ import java.util.ArrayList;
 import static com.mjc.yhs.move2diner.MainActivity.secondDatabase;
 
 public class ReviewActivity extends AppCompatActivity {
-
-
-    RecyclerViewEmptySupport recycler_review;
-    ArrayList<ReviewListItem> reviewListItems = new ArrayList<>();
-    ArrayList<String> reviewKeys = new ArrayList<>();
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    private RecyclerViewEmptySupport recycler_review;
+    private ArrayList<ReviewListItem> reviewListItems = new ArrayList<>();
+    private ArrayList<String> reviewKeys = new ArrayList<>();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

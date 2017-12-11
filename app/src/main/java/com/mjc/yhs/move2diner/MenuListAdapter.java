@@ -50,8 +50,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
         holder.tvRecycleFDName.setText(properties.get(position).getFoodName());
         holder.tvRecycleFDPrice.setText(NumberFormat.getCurrencyInstance().format(properties.get(position).getFoodPrice()));
         holder.tvRecycleFDDescribe.setText(properties.get(position).getFoodDescribe());
-        if(properties.get(position).getFoodStoragePath() != null)
-            Glide.with(c).load(properties.get(position).getFoodStoragePath()).into(holder.ivFoodimg);
+        Glide.with(c).load(properties.get(position).getFoodStoragePath()).placeholder(R.drawable.lunch_box).error(R.drawable.lunch_box).into(holder.ivFoodimg);
         holder.btnDeleteResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
