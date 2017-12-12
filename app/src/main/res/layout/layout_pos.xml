@@ -34,13 +34,13 @@
             android:textColor="#000" />
 
         <Button
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
             android:background="@drawable/btn_outline"
             android:backgroundTint="#3498FD"
-            android:text="다음 >" />
+            android:text="판매완료" />
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -70,12 +70,12 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.975" />
 
-        <android.support.v7.widget.RecyclerView
+        <com.mjc.yhs.move2diner.RecyclerViewEmptySupport
             android:id="@+id/rvFoodList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/btn_round_background"
             android:backgroundTint="#FFF"
             android:padding="8dp"
@@ -86,7 +86,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_noMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="메뉴가 없습니다."
@@ -150,24 +150,24 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
-            android:id="@+id/imageButton"
+            android:id="@+id/iv_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icons8_businessman_96"
             app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+            app:layout_constraintEnd_toStartOf="@+id/iv_female"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view" />
 
         <ImageView
-            android:id="@+id/imageButton2"
+            android:id="@+id/iv_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icons8_businesswoman_96"
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/iv_male"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -176,7 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="나이대"
+            android:text="구매자 연령"
             android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -194,64 +194,72 @@
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <LinearLayout
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmentedGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:orientation="horizontal"
+            android:padding="1dp"
             android:weightSum="1"
             app:layout_constraintBottom_toBottomOf="@id/view2"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintTop_toTopOf="@+id/view2">
 
-            <Button
+            <RadioButton
+                android:id="@+id/segmentedRB1"
+                style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:background="#2c3e50"
                 android:text="10대" />
 
-            <Button
+            <RadioButton
+                android:id="@+id/segmentedRB2"
+                style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:background="#2c3e50"
                 android:text="20대" />
 
-            <Button
+            <RadioButton
+                android:id="@+id/segmentedRB3"
+                style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:background="#2c3e50"
                 android:text="30대" />
 
-            <Button
+            <RadioButton
+                android:id="@+id/segmentedRB4"
+                style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:background="#2c3e50"
                 android:text="40대" />
 
-            <Button
+            <RadioButton
+                android:id="@+id/segmentedRB5"
+                style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:background="#2c3e50"
-                android:text="40대" />
-        </LinearLayout>
+                android:text="50대" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="판매 정보"
             android:textColor="#000"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"/>
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <View
             android:id="@+id/view3"
@@ -263,5 +271,16 @@
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <com.mjc.yhs.move2diner.RecyclerViewEmptySupport
+            android:id="@+id/rvPOSResult"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toTopOf="@+id/view3" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

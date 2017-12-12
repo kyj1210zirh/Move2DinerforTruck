@@ -60,6 +60,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
         holder.tv_foodPrice.setHint(String.valueOf(properties.get(position).getFoodPrice()));
         holder.tv_foodName.setTextColor(Color.BLACK);
         holder.tv_foodPrice.setTextColor(Color.BLACK);
+        properties.get(position).setFoodEA(0);
         holder.tv_itemCount.setText("0");
         holder.tv_itemCount.setVisibility(View.GONE);
         holder.cl_food.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,8 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
                 holder.tv_foodPrice.setTextColor(Color.WHITE);
                 if(holder.tv_itemCount.getVisibility()==View.GONE)
                     holder.tv_itemCount.setVisibility(View.VISIBLE);
-                int cnt = Integer.parseInt(holder.tv_itemCount.getText().toString())+1;
+                properties.get(position).setFoodEA(properties.get(position).getFoodEA()+1);
+                int cnt = properties.get(position).getFoodEA();
                 holder.tv_itemCount.setText(String.valueOf(cnt));
 
                 int price = Integer.parseInt(holder.tv_foodPrice.getHint().toString());

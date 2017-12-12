@@ -6,7 +6,7 @@
         android:title="영업"/>
     <item
         android:id="@+id/btm_revenue"
-        android:icon="@drawable/ic_dns"
+        android:icon="@drawable/ic_monetization_on"
         android:title="POS"/>
     <item
         android:id="@+id/btm_others"

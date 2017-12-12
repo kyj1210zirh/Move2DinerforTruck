@@ -74,33 +74,6 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
         holder.Recyclelayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                dialogview = View.inflate(c, R.layout.menu_foodinfo, null);
-//                AlertDialog.Builder dlg = new AlertDialog.Builder(c);
-//                dlg.setTitle("메뉴 수정");
-//                dlg.setView(dialogview);
-//                final EditText txtMenuName = (EditText) dialogview.findViewById(R.id.txtMenuName);
-//                final EditText txtMenuPrice = (EditText) dialogview.findViewById(R.id.txtMenuPrice);
-//                final EditText txtMenuDescribe = (EditText) dialogview.findViewById(R.id.txtMenuDescribe);
-//                txtMenuName.setText(holder.tvRecycleFDName.getText().toString());
-//                String price = holder.tvRecycleFDPrice.getText().toString();
-//                price = price.replaceAll(",", "");
-//                txtMenuPrice.setText(price.substring(1, price.length()));
-//                txtMenuDescribe.setText(holder.tvRecycleFDDescribe.getText().toString());
-//                dlg.setNegativeButton("취소", null);
-//                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        MenuListItem fdDTO = new MenuListItem(txtMenuName.getText().toString(),
-//                                txtMenuDescribe.getText().toString(),
-//                                Integer.parseInt(txtMenuPrice.getText().toString())
-//                        );
-//
-//                        mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).child(menuKeys.get(position)).setValue(fdDTO);
-//
-//                    }
-//                });
-//                dlg.show();
                 Intent i = new Intent(c, DMMenuActivity.class);
                 i.putExtra("PrimaryKey",menuKeys.get(position));
                 c.startActivity(i);

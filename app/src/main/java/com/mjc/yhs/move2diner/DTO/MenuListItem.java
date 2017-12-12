@@ -9,6 +9,8 @@ public class MenuListItem {
     private int foodPrice;
     private String foodStoragePath;
 
+    private int foodEA;//only use PosFragment.
+
     public MenuListItem(){}
     public MenuListItem(String foodName, String foodDescribe, int foodPrice) {
         this.foodName = foodName;
@@ -21,6 +23,14 @@ public class MenuListItem {
         this.foodDescribe = foodDescribe;
         this.foodPrice = foodPrice;
         this.foodStoragePath = foodStoragePath;
+    }
+
+    public int getFoodEA() {
+        return foodEA;
+    }
+
+    public void setFoodEA(int foodEA) {
+        this.foodEA = foodEA;
     }
 
     public void setFoodName(String name)
