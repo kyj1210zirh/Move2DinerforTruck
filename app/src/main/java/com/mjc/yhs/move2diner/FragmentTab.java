@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.mjc.yhs.move2diner.Fragment.OthersFragment;
 import com.mjc.yhs.move2diner.Fragment.PosFragment;
@@ -19,6 +20,8 @@ public class FragmentTab extends AppCompatActivity implements NavigationView.OnN
     private BottomNavigationView bottomNavigationView;
     private MenuItem prevMenuItem;
     private BackPressCloseHandler backPressCloseHandler;
+
+    public static Boolean isSalesSituation = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,10 +81,14 @@ public class FragmentTab extends AppCompatActivity implements NavigationView.OnN
                 viewPager.setCurrentItem(0);
                 break;
             case R.id.btm_revenue:
+                if (isSalesSituation == false) {
+                    Toast.makeText(this, "영업을 먼저 시작해 주세요.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 viewPager.setCurrentItem(1);
                 break;
             case R.id.btm_others:
-                viewPager.setCurrentItem(3);
+                viewPager.setCurrentItem(2);
         }
         return false;
     }

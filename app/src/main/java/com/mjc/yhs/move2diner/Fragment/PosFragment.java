@@ -73,7 +73,7 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
         rootView.findViewById(R.id.btn_cancle).setOnClickListener(this);
         btn_confirm = (Button) rootView.findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);
-        ConstraintLayout1 = (ConstraintLayout)rootView.findViewById(R.id.ConstraintLayout1);
+        ConstraintLayout1 = (ConstraintLayout) rootView.findViewById(R.id.ConstraintLayout1);
 //        ConstraintLayout2 = (ConstraintLayout)rootView.findViewById(R.id.ConstraintLayout2);
 
         //ConstraintLayout1
@@ -109,13 +109,9 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
                     properties.add(menuListItem);
                 }
                 foodListAdapter.notifyDataSetChanged();
-                GridLayoutManager glm = new GridLayoutManager(getContext(), 3);
-                if(foodListAdapter.getItemCount()<7)
-                    glm.setSpanCount(2);
-                else if(foodListAdapter.getItemCount()<13)
-                    glm.setSpanCount(3);
-                else
-                    glm.setSpanCount(4);
+                GridLayoutManager glm = new GridLayoutManager(getContext(), 2);
+
+                glm.setSpanCount((int) Math.sqrt(properties.size() - 1) + 1);
                 rvFoodList.setLayoutManager(glm);
             }
 
@@ -127,7 +123,7 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
     }
 
     @Override
-    public void onItemClick(int price, int position, int cnt) {
+    public void onItemClick(int price, int position, int cnt, String foodID) {
         totalPrice += price;
 //        selectProperties.add(position, properties.get(position));
         tv_totalPrice.setText(NumberFormat.getCurrencyInstance().format(totalPrice));
@@ -144,7 +140,24 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
                 tv_totalPrice.setText("금액");
 //                btn_next.setText("다음 >");
                 break;
-            case R.id.btn_confirm:
+//            case R.id.btn_confirm:
+//                mDatabase.child("trucks/salessituation").child(user.getUid()).limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                            if (((Boolean) snapshot.child("onBusiness").getValue()) == true) {
+//                                DatabaseReference databaseReference = snapshot.getRef();
+//                                databaseReference.setValue()
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+
 
 //                if(totalPrice==0){
 //                    Toast.makeText(getContext(), "1개 이상의 메뉴가 선택되어야 합니다.", Toast.LENGTH_SHORT).show();
@@ -153,7 +166,7 @@ public class PosFragment extends Fragment implements FoodListAdapter.FoodListLis
 //                    ConstraintLayout2.setVisibility(View.VISIBLE);
 //                    btn_confirm.setText("확인");
 //                }
-                break;
+//            break;
 //            case R.id.iv_male:
 //                iv_male.setImageResource(R.drawable.icons8_businessman_check_96);
 //                iv_female.setImageResource(R.drawable.icons8_businesswoman_96);

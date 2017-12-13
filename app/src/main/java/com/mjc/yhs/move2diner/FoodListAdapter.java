@@ -75,13 +75,17 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
                 holder.tv_itemCount.setText(String.valueOf(cnt));
 
                 int price = Integer.parseInt(holder.tv_foodPrice.getHint().toString());
-                foodListListener.onItemClick(price, position, cnt);
+
+
+                //foodListListener.onItemClick(price, position, cnt, );
+
+
             }
         });
     }
 
     public interface FoodListListener{
-        void onItemClick(int price, int position, int cnt);
+        void onItemClick(int price, int position, int cnt, String FoodID);
     }
 
     public void registerFoodListListener(FoodListListener foodListListener){
