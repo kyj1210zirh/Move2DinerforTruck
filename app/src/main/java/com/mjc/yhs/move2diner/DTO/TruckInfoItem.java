@@ -1,9 +1,20 @@
 package com.mjc.yhs.move2diner.DTO;
 
-public class TruckInfoItem {
-    private String truckName,truckDes,thumbnail,busiInfo;
-    private Boolean payCard;
+import java.util.ArrayList;
 
+public class TruckInfoItem {
+    private String truckName,truckDes,thumbnail;
+    private Boolean payCard;
+    private ArrayList<String> tags=new ArrayList<>();
+
+
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
 
     public Boolean getPayCard() {
         return payCard;
@@ -38,13 +49,6 @@ public class TruckInfoItem {
         this.thumbnail = thumbnail;
     }
 
-    public String getBusiInfo() {
-        return busiInfo;
-    }
-
-    public void setBusiInfo(String busiInfo) {
-        this.busiInfo = busiInfo;
-    }
 
 
 
@@ -52,6 +56,5 @@ public class TruckInfoItem {
         this.truckName = truckName;
         this.truckDes = truckDes;
         this.thumbnail = thumbnail;
-        this.busiInfo = busiInfo;
     }
 }

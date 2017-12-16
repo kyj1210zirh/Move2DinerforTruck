@@ -24,8 +24,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -55,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private Uri imagePath;
     private ImageView img_thumbnail;
-    private TextView text_truckName, text_description, text_busiInfo, text_noPicture;
+    private TextView text_truckName, text_description, text_tags, text_noPicture;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private ThumbnailPermission thumbnailPermission = new ThumbnailPermission();
@@ -63,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private PictureAdapter pictureAdapter;
     private RecyclerView recyclerView;
     private ArrayList<PictureDTO> pictures = new ArrayList<>();
-    private String truckname, description, busiInfo;
+    private String truckname, description;
     private ScrollView scrollView;
     private Switch switch_paycard;
 
@@ -90,10 +88,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 TruckInfoItem info = dataSnapshot.getValue(TruckInfoItem.class);
                 truckname = info.getTruckName();
                 description = info.getTruckDes();
-                busiInfo = info.getBusiInfo();
+
+
+                StringBuilder sb = new StringBuilder();
+
+                if (info.getTags() != null) {
+                    for (int i = 0; i < info.getTags().size(); i++) {
+                        sb.append(info.getTags().get(i) + ",");
+                    }
+                    sb.delete(sb.length()-1, sb.length());
+                    text_tags.setText(sb);
+                }
 
                 text_description.setText(description);
-                text_busiInfo.setText(busiInfo);
                 Glide.with(ProfileActivity.this).load(info.getThumbnail()).placeholder(R.drawable.ic_account_circle_black_24dp)
                         .error(R.drawable.ic_account_circle_black_24dp).into(img_thumbnail);
 
@@ -146,14 +153,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         img_thumbnail = (ImageView) findViewById(R.id.img_thumbnail);
         text_truckName = (TextView) findViewById(R.id.text_truckName);
         text_description = (TextView) findViewById(R.id.text_description);
-        text_busiInfo = (TextView) findViewById(R.id.text_busiInfo);
+        text_tags = (TextView) findViewById(R.id.text_tags);
         text_noPicture = (TextView) findViewById(R.id.text_noPicture);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         text_truckName.setOnClickListener(this);
         text_description.setOnClickListener(this);
-        text_busiInfo.setOnClickListener(this);
+        text_tags.setOnClickListener(this);
         img_thumbnail.setOnClickListener(this);
 
         findViewById(R.id.edit_thumbnail).setOnClickListener(this);
@@ -326,19 +333,36 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 alert2.show();
 
                 break;
-            case R.id.text_busiInfo:
+            case R.id.text_tags:
                 AlertDialog.Builder alert3 = new AlertDialog.Builder(ProfileActivity.this);
-                alert3.setTitle("영업 정보 수정\n(영업장소, 영업요일, 영업시간");
-                //이거 인터페이스 제공해줘야하나,, 각각 쓸수있게
+                alert3.setTitle("태그 입력 (ex) 강남,홍대");
+
                 final EditText editText3 = new EditText(ProfileActivity.this);
                 alert3.setView(editText3);
-                editText3.setText(text_busiInfo.getText().toString());
+
+                editText3.setText(text_tags.getText().toString());
+
+
                 alert3.setPositiveButton("변경", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        String[] splited = editText3.getText().toString().split(",");
+
+                        ArrayList<String> tags = new ArrayList<>();
+                        for (int i = 0; i < splited.length; i++) {
+                            tags.add(splited[i]);
+                        }
+
                         secondDatabase.getReference().child("trucks").child("info").child(auth.getCurrentUser().getUid())
-                                .child("busiInfo").setValue(editText3.getText().toString());
-                        text_busiInfo.setText(editText3.getText().toString());
+                                .child("tags").setValue(tags);
+
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < tags.size(); i++) {
+                            sb.append(tags.get(i) + ",");
+                        }
+                        sb.delete(sb.length()-1, sb.length());
+                        text_tags.setText(sb);
+
                     }
                 });
                 alert3.setNegativeButton("취소", new DialogInterface.OnClickListener() {

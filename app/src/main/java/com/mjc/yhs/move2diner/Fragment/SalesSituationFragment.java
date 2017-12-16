@@ -101,7 +101,7 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
             rootView = inflater.inflate(R.layout.layout_sales_status, container, false);
         } catch (InflateException e) {
         }
-        savedInstanceState.putBoolean("Situation",btnSituation);
+
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
