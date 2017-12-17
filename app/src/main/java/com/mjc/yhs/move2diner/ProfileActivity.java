@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -89,14 +91,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 truckname = info.getTruckName();
                 description = info.getTruckDes();
 
-
                 StringBuilder sb = new StringBuilder();
 
-                if (info.getTags() != null) {
+                if (info.getTags().size() != 0) {
                     for (int i = 0; i < info.getTags().size(); i++) {
                         sb.append(info.getTags().get(i) + ",");
                     }
-                    sb.delete(sb.length()-1, sb.length());
+
+                    sb.delete(sb.length() - 1, sb.length());
                     text_tags.setText(sb);
                 }
 
@@ -360,7 +362,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         for (int i = 0; i < tags.size(); i++) {
                             sb.append(tags.get(i) + ",");
                         }
-                        sb.delete(sb.length()-1, sb.length());
+                        sb.delete(sb.length() - 1, sb.length());
                         text_tags.setText(sb);
 
                     }
@@ -442,5 +444,22 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         public void onPermissionDenied(ArrayList<String> deniedPermissions) {
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (secondDatabase == null) {
+            //리뷰데이터는 사용자쪽에 저장해놓고 가져오는걸로 하자
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setApiKey("AIzaSyC6qXo2aEQBYFaZFpzXbn1VUt81jwEojys")
+                    .setApplicationId("com.mjc.yhs.move2diner")
+                    .setDatabaseUrl("https://movetodiner.firebaseio.com/")
+                    .build();
+
+            FirebaseApp secondApp = FirebaseApp.initializeApp(getApplicationContext(), options, "second app");
+            secondDatabase = FirebaseDatabase.getInstance(secondApp);  //이거 스태틱으로 만들어서 쓰게 함
+        }
+
     }
 }
