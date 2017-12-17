@@ -9,7 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
 import com.mjc.yhs.move2diner.Fragment.OthersFragment;
 import com.mjc.yhs.move2diner.Fragment.PosFragment;
 import com.mjc.yhs.move2diner.Fragment.SalesSituationFragment;
@@ -19,6 +21,8 @@ public class FragmentTab extends AppCompatActivity implements NavigationView.OnN
     private BottomNavigationView bottomNavigationView;
     private MenuItem prevMenuItem;
     private BackPressCloseHandler backPressCloseHandler;
+    public static boolean BusniessSituation = false;
+    public static DatabaseReference databaseReference; //SalesSituationFragment의 mDatabase.child("trucks").child("salessituation").child(user.getUid()).push();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,10 +82,14 @@ public class FragmentTab extends AppCompatActivity implements NavigationView.OnN
                 viewPager.setCurrentItem(0);
                 break;
             case R.id.btm_revenue:
+                if(BusniessSituation == false){
+                    Toast.makeText(this, "영업을 시작한 후 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 viewPager.setCurrentItem(1);
                 break;
             case R.id.btm_others:
-                viewPager.setCurrentItem(3);
+                viewPager.setCurrentItem(2);
         }
         return false;
     }

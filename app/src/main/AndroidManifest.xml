@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".FragmentTab"
             android:label="Move2DinerforTruck"/>
+        <activity android:name=".SalesResultDetailsActivity"/>
         <activity android:name=".SalesResultActivity"/>
         <activity android:name=".ReviewActivity" />
         <activity android:name=".MenuInfoActivity" />

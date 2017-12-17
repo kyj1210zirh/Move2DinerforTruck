@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mjc.yhs.move2diner.DTO.MenuListItem;
+import com.mjc.yhs.move2diner.DTO.PosMenuListItem;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -17,9 +19,9 @@ import java.util.ArrayList;
 
 public class SalesResultDetailsAdapter extends RecyclerView.Adapter<SalesResultDetailsAdapter.MyViewHolder> {
     private Context c;
-    private ArrayList<MenuListItem> properties;
+    private ArrayList<PosMenuListItem> properties;
 
-    public SalesResultDetailsAdapter(Context c, ArrayList<MenuListItem> properties) {
+    public SalesResultDetailsAdapter(Context c, ArrayList<PosMenuListItem> properties) {
         this.c = c;
         this.properties = properties;
     }
@@ -33,13 +35,13 @@ public class SalesResultDetailsAdapter extends RecyclerView.Adapter<SalesResultD
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_foodName.setText(properties.get(position).getFoodName());
-        holder.tv_foodEA.setText(properties.get(position).getFoodEA());
-        holder.tv_foodPrice.setText(properties.get(position).getFoodPrice());
+        holder.tv_foodEA.setText(String.format("%,d",properties.get(position).getFoodEA()) + " 개");
+        holder.tv_foodPrice.setText(NumberFormat.getCurrencyInstance().format(properties.get(position).getFoodPrice()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return properties.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -45,6 +45,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.mjc.yhs.move2diner.FragmentTab;
 import com.mjc.yhs.move2diner.R;
 
 import java.io.IOException;
@@ -140,9 +141,10 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
                     String formatDate2 = sdfNow2.format(date);
 
                     if (!btnSituation) {
-
                         pushid = mDatabase.child("trucks").child("salessituation").child(user.getUid()).push();
+                        ((FragmentTab)getActivity()).databaseReference = pushid;
                         btnSituation = true;
+                        ((FragmentTab)getActivity()).BusniessSituation = true;
                         BtnSalesSituation.setText("영업 종료하기");
                         BtnSalesSituation.setBackgroundColor(Color.BLUE);
 
@@ -350,7 +352,9 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (((Boolean) snapshot.child("onBusiness").getValue()) == true) {
                         pushid = snapshot.getRef();
+                        ((FragmentTab)getActivity()).databaseReference = pushid;
                         btnSituation = true;
+                        ((FragmentTab)getActivity()).BusniessSituation = true;
                         BtnSalesSituation.setText("스위치 ON");
                         BtnSalesSituation.setBackgroundColor(Color.BLUE);
                         SalesStartTime = snapshot.child("starttime").getValue().toString();
