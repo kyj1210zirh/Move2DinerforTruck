@@ -19,7 +19,7 @@
         style="@style/textViewOther"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_restaurant_menu"
+        android:drawableLeft="@drawable/ic_dns"
         android:drawableTint="#000"
         android:text="영업내역" />
 

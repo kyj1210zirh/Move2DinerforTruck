@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mjc.yhs.move2diner.DTO.MenuListItem;
+import com.mjc.yhs.move2diner.DTO.PosMenuListItem;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -27,11 +28,11 @@ import java.util.ArrayList;
 
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyViewHolder>{
     private Context c;
-    private ArrayList<MenuListItem> properties;
+    private ArrayList<PosMenuListItem> properties;
     private FoodListListener foodListListener;
     private int itemPosition;
 
-    public FoodListAdapter(Context c, ArrayList<MenuListItem> properties) {
+    public FoodListAdapter(Context c, ArrayList<PosMenuListItem> properties) {
         this.c = c;
         this.properties = properties;
     }
@@ -53,12 +54,12 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         itemPosition = position;
-        MenuListItem menuListItem = properties.get(position);
-        Glide.with(c).load(menuListItem.getFoodStoragePath()).placeholder(R.drawable.lunch_box).error(R.drawable.lunch_box).into(holder.iv_foodImage);
-        holder.tv_foodName.setText(menuListItem.getFoodName());
-        holder.tv_foodPrice.setText(NumberFormat.getCurrencyInstance().format(menuListItem.getFoodPrice()));
-        holder.tv_foodPrice.setHint(String.valueOf(properties.get(position).getFoodPrice()));
+        PosMenuListItem posMenuListItem = properties.get(position);
+        Glide.with(c).load(posMenuListItem.getFoodStoragePath()).placeholder(R.drawable.lunch_box).error(R.drawable.lunch_box).into(holder.iv_foodImage);
+        holder.tv_foodName.setText(posMenuListItem.getFoodName());
         holder.tv_foodName.setTextColor(Color.BLACK);
+        holder.tv_foodPrice.setText(NumberFormat.getCurrencyInstance().format(posMenuListItem.getFoodPrice()));
+        holder.tv_foodPrice.setHint(String.valueOf(properties.get(position).getFoodPrice()));
         holder.tv_foodPrice.setTextColor(Color.BLACK);
         properties.get(position).setFoodEA(0);
         holder.tv_itemCount.setText("0");
@@ -75,17 +76,13 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
                 holder.tv_itemCount.setText(String.valueOf(cnt));
 
                 int price = Integer.parseInt(holder.tv_foodPrice.getHint().toString());
-
-
-                //foodListListener.onItemClick(price, position, cnt, );
-
-
+                foodListListener.onItemClick(price, position);
             }
         });
     }
 
     public interface FoodListListener{
-        void onItemClick(int price, int position, int cnt, String FoodID);
+        void onItemClick(int price, int position);
     }
 
     public void registerFoodListListener(FoodListListener foodListListener){

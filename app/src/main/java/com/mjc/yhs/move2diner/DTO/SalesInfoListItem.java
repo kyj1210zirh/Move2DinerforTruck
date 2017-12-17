@@ -1,8 +1,9 @@
 package com.mjc.yhs.move2diner.DTO;
 
+import java.io.Serializable;
+
 public class SalesInfoListItem{
     private String locationlat,locationlon,salesdate,endtime,starttime,truckName,truckUid,addressLine,thumbnail; //영업 데이터
-    private String memo, salesAccount; //매출 입력 데이터
     private Boolean onBusiness;
     public SalesInfoListItem(){}
 
@@ -20,22 +21,6 @@ public class SalesInfoListItem{
 
     public void setSalesdate(String salesdate) {
         this.salesdate = salesdate;
-    }
-
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo;
-    }
-
-    public String getSalesAccount() {
-        return salesAccount;
-    }
-
-    public void setSalesAccount(String salesAccount) {
-        this.salesAccount = salesAccount;
     }
 
     public String getAddressLine() {

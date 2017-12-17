@@ -44,7 +44,6 @@ public class OthersFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.btnProfile:
                 i = new Intent(getActivity(), ProfileActivity.class);
                 startActivity(i);

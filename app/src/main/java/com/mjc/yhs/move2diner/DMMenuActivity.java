@@ -120,7 +120,7 @@ public class DMMenuActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void AddMenu(Uri uri) {
-        if (uri != null) {
+        if (uri != null && uid==null) {
             StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://move2diner.appspot.com");
 
             Uri file = uri;
@@ -145,15 +145,22 @@ public class DMMenuActivity extends AppCompatActivity implements View.OnClickLis
                             edt_FDDescribe.getText().toString(),
                             Integer.parseInt(edt_FDPrice.getText().toString()),
                             taskSnapshot.getDownloadUrl().toString());
+
                     mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).push().setValue(fdDTO);
                 }
             });
-        } else {
+        } else if(uid==null) {
             MenuListItem fdDTO = new MenuListItem(edt_FDName.getText().toString(),
                     edt_FDDescribe.getText().toString(),
                     Integer.parseInt(edt_FDPrice.getText().toString()),
                     "https://firebasestorage.googleapis.com/v0/b/move2diner.appspot.com/o/images%2Fmenus%2FJPEG_20171113165628_1722086011.jpg?alt=media&token=0ce34944-f687-4e7a-a4ea-f63234e10703");
             mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).push().setValue(fdDTO);
+        } else{
+            MenuListItem fdDTO = new MenuListItem(edt_FDName.getText().toString(),
+                    edt_FDDescribe.getText().toString(),
+                    Integer.parseInt(edt_FDPrice.getText().toString()),
+                    imagePath.toString());
+            mDatabase.child("trucks").child("menu").child(auth.getCurrentUser().getUid()).child(uid).setValue(fdDTO);
         }
         finish();
     }

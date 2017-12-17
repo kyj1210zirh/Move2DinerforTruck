@@ -101,7 +101,6 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
             rootView = inflater.inflate(R.layout.layout_sales_status, container, false);
         } catch (InflateException e) {
         }
-
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
@@ -142,10 +141,10 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
                     String formatDate2 = sdfNow2.format(date);
 
                     if (!btnSituation) {
-
                         pushid = mDatabase.child("trucks").child("salessituation").child(user.getUid()).push();
+                        ((FragmentTab)getActivity()).databaseReference = pushid;
                         btnSituation = true;
-                        ((FragmentTab) getActivity()).isSalesSituation = true;
+                        ((FragmentTab)getActivity()).BusniessSituation = true;
                         BtnSalesSituation.setText("영업 종료하기");
                         BtnSalesSituation.setBackgroundColor(Color.BLUE);
 
@@ -180,7 +179,7 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
                                 if (list.size() == 0) {
                                 } else {
                                     SalesLocation = list.get(0).getAddressLine(0);
-                                    SalesLocation = SalesLocation.replace("대한민국 ", "");
+                                    SalesLocation= SalesLocation.replace("대한민국 ","");
 
                                     pushid.child("addressLine").setValue(SalesLocation);
                                     pushid.child("locationlat").setValue(String.valueOf(d1));
@@ -196,7 +195,6 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
                         }
                     } else {
                         //종료버튼 눌렀을때
-                        ((FragmentTab) getActivity()).isSalesSituation = false;
                         secondDatabase.getReference().child("trucks").child("info").child(user.getUid()).child("onBusiness").setValue(false);
                         btnSituation = false;
                         BtnSalesSituation.setText("스위치 OFF");
@@ -354,8 +352,9 @@ public class SalesSituationFragment extends Fragment implements OnMapReadyCallba
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (((Boolean) snapshot.child("onBusiness").getValue()) == true) {
                         pushid = snapshot.getRef();
+                        ((FragmentTab)getActivity()).databaseReference = pushid;
                         btnSituation = true;
-                        ((FragmentTab) getActivity()).isSalesSituation = true;
+                        ((FragmentTab)getActivity()).BusniessSituation = true;
                         BtnSalesSituation.setText("스위치 ON");
                         BtnSalesSituation.setBackgroundColor(Color.BLUE);
                         SalesStartTime = snapshot.child("starttime").getValue().toString();

@@ -50,9 +50,7 @@ public class TruckInfoItem {
     }
 
 
-
-
-    public TruckInfoItem(String truckName, String truckDes, String thumbnail, String busiInfo) {
+    public TruckInfoItem(String truckName, String truckDes, String thumbnail) {
         this.truckName = truckName;
         this.truckDes = truckDes;
         this.thumbnail = thumbnail;

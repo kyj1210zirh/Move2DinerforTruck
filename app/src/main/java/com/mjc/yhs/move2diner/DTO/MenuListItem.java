@@ -9,9 +9,9 @@ public class MenuListItem {
     private int foodPrice;
     private String foodStoragePath;
 
-    private int foodEA;//only use PosFragment.
+    public MenuListItem() {
+    }
 
-    public MenuListItem(){}
     public MenuListItem(String foodName, String foodDescribe, int foodPrice) {
         this.foodName = foodName;
         this.foodDescribe = foodDescribe;
@@ -25,41 +25,27 @@ public class MenuListItem {
         this.foodStoragePath = foodStoragePath;
     }
 
-    public int getFoodEA() {
-        return foodEA;
-    }
-
-    public void setFoodEA(int foodEA) {
-        this.foodEA = foodEA;
-    }
-
-    public void setFoodName(String name)
-    {
+    public void setFoodName(String name) {
         foodName = name;
     }
 
-    public void setFoodDescribe(String describe)
-    {
+    public void setFoodDescribe(String describe) {
         foodDescribe = describe;
     }
 
-    public void setFoodPrice(int price)
-    {
+    public void setFoodPrice(int price) {
         foodPrice = price;
     }
 
-    public String getFoodName()
-    {
+    public String getFoodName() {
         return foodName;
     }
 
-    public String getFoodDescribe()
-    {
+    public String getFoodDescribe() {
         return foodDescribe;
     }
 
-    public int getFoodPrice()
-    {
+    public int getFoodPrice() {
         return foodPrice;
     }
 
@@ -73,7 +59,7 @@ public class MenuListItem {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof MenuListItem){
+        if (obj instanceof MenuListItem) {
             MenuListItem another = (MenuListItem) obj;
             return TextUtils.equals(this.foodName, another.foodName);
         }

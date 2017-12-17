@@ -30,12 +30,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SalesResultActivity extends AppCompatActivity implements View.OnClickListener {
-    RecyclerView rvResult;
-    SalesResultAdapter salesResultAdapter;
-    ArrayList<SalesInfoListItem> properties;
-    ArrayList<String> uidKeys;
-    Query situationQuery;
-    Button btnStartDate, btnEndDate;
+    private RecyclerView rvResult;
+    private SalesResultAdapter salesResultAdapter;
+    private ArrayList<SalesInfoListItem> properties;
+    private ArrayList<String> uidKeys;
+    private Query situationQuery;
+    private Button btnStartDate, btnEndDate;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -46,6 +46,7 @@ public class SalesResultActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_sales_result);
+        new CustomTitlebar(this, "영업 내역 보기");
 
         rvResult = (RecyclerView) findViewById(R.id.rvResult);
         properties = new ArrayList<SalesInfoListItem>();
@@ -151,7 +152,6 @@ public class SalesResultActivity extends AppCompatActivity implements View.OnCli
                 }
                 break;
             case R.id.btnDateSearch:
-
                 situationQuery = mDatabase.child("trucks").child("salessituation").child(uid).orderByChild("salesdate").startAt(btnStartDate.getText().toString()).endAt(btnEndDate.getText().toString());
                 situationQuery.removeEventListener(vel);
                 situationQuery.addValueEventListener(vel);
